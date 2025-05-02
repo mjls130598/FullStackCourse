@@ -15,10 +15,11 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  const [all, setAll] = useState(0)
 
-  const handleClickGood = () => {setGood(good + 1)}
-  const handleClickNeutral = () => {setNeutral(neutral + 1)}
-  const handleClickBad = () => {setBad(bad + 1)}
+  const handleClickGood = () => {setGood(good + 1); setAll(all + 1)}
+  const handleClickNeutral = () => {setNeutral(neutral + 1); setAll(all + 1)}
+  const handleClickBad = () => {setBad(bad + 1); setAll(all + 1)}
 
   return (
     <div>
@@ -33,6 +34,9 @@ const App = () => {
         <Statistic name="good" number={good}/>
         <Statistic name="neutral" number={neutral}/>
         <Statistic name="bad" number={bad}/>
+        <Statistic name="all" number={all}/>
+        <Statistic name="average" number={(good - bad)/all}/>
+        <Statistic name="positive" number={(good/all) * 100 + "%"}/>
       </div>
     </div>
   )
