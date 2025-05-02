@@ -10,17 +10,22 @@ const Statistic = ({name, number}) => (
   <p>{name} {number}</p>
 )
 
-const Statistics = ({good, neutral, bad, all}) => (
-  <div>
-    <h1>Statistics</h1>
-    <Statistic name="good" number={good}/>
-    <Statistic name="neutral" number={neutral}/>
-    <Statistic name="bad" number={bad}/>
-    <Statistic name="all" number={all}/>
-    <Statistic name="average" number={(good - bad)/all}/>
-    <Statistic name="positive" number={(good/all) * 100 + "%"}/>
-  </div>
-)
+const Statistics = ({good, neutral, bad, all}) => {
+  if(all > 0)
+    return(
+      <div>
+        <h1>Statistics</h1>
+        <Statistic name="good" number={good}/>
+        <Statistic name="neutral" number={neutral}/>
+        <Statistic name="bad" number={bad}/>
+        <Statistic name="all" number={all}/>
+        <Statistic name="average" number={(good - bad)/all}/>
+        <Statistic name="positive" number={(good/all) * 100 + "%"}/>
+      </div>
+    )
+  else
+    return(<p>No feedback given</p>)
+}
 
 const App = () => {
   // guarda los clics de cada botón en su propio estado
