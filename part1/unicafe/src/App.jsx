@@ -10,6 +10,18 @@ const Statistic = ({name, number}) => (
   <p>{name} {number}</p>
 )
 
+const Statistics = ({good, neutral, bad, all}) => (
+  <div>
+    <h1>Statistics</h1>
+    <Statistic name="good" number={good}/>
+    <Statistic name="neutral" number={neutral}/>
+    <Statistic name="bad" number={bad}/>
+    <Statistic name="all" number={all}/>
+    <Statistic name="average" number={(good - bad)/all}/>
+    <Statistic name="positive" number={(good/all) * 100 + "%"}/>
+  </div>
+)
+
 const App = () => {
   // guarda los clics de cada botón en su propio estado
   const [good, setGood] = useState(0)
@@ -29,15 +41,7 @@ const App = () => {
         <Button handleClick={handleClickNeutral} text="neutral"/>
         <Button handleClick={handleClickBad} text="bad"/>
       </div>
-      <div>
-        <h1>Statistics</h1>
-        <Statistic name="good" number={good}/>
-        <Statistic name="neutral" number={neutral}/>
-        <Statistic name="bad" number={bad}/>
-        <Statistic name="all" number={all}/>
-        <Statistic name="average" number={(good - bad)/all}/>
-        <Statistic name="positive" number={(good/all) * 100 + "%"}/>
-      </div>
+      <Statistics good={good} neutral={neutral} bad={bad} all={all}/>
     </div>
   )
 }
