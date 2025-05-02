@@ -2,14 +2,15 @@
 
 ```mermaid
 sequenceDiagram
+    participant User
     participant Browser
     participant Server
 
+    User->>Browser: Write note and send form
+
     Browser->>Server: POST https://studies.cs.helsinki.fi/exampleapp/new_note with "note"
     activate Server
-
-    Note left of Server: Server push the note with the currently date
-
+    Server-->>Server: Push note with current date
     Server-->>Browser: HTTP Status 302
     deactivate Server
 
