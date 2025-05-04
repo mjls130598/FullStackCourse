@@ -4,11 +4,13 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import Notification from './components/Notification'
+import Error from './components/Error'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newFilter, setNewFilter] = useState('')
   const [notificationMessage, setNotificationMessage] = useState('nothing happened ...')
+  const [errorMessage, setErrorMessage] = useState('nothing happend yet ...')
 
   useEffect(() => {
     phoneService.getAll()
@@ -41,10 +43,11 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Notification message={notificationMessage} />
+      <Error message={errorMessage} />
       <Filter newFilter={newFilter} setNewFilter={setNewFilter}/>
       <h2>Add a new</h2>
       <PersonForm persons={persons} setPersons={setPersons}
-        notificationMessage={notificationMessage} setNotificationMessage={setNotificationMessage} />
+        setNotificationMessage={setNotificationMessage} setErrorMessage={setErrorMessage} />
       <h2>Numbers</h2>
       <Persons persons={phonesToShow} handleRemove={handleRemove}/>
     </div>

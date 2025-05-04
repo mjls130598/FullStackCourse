@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import phoneService from '../services/phones'
 
-const PersonForm = ({persons, setPersons, notificationMessage, setNotificationMessage}) => {
+const PersonForm = ({persons, setPersons, setNotificationMessage, setErrorMessage}) => {
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
 
@@ -43,6 +43,14 @@ const PersonForm = ({persons, setPersons, notificationMessage, setNotificationMe
                         setTimeout(() => {
                             setNotificationMessage(null)
                         }, 5000)                        
+                    })
+                    .catch(() =>{
+                        setErrorMessage(
+                            `${oldPerson.name} can't be modified`
+                            )
+                        setTimeout(() => {
+                            setErrorMessage(null)
+                        }, 5000) 
                     })
             }
         }
