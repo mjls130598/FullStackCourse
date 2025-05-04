@@ -3,10 +3,12 @@ import phoneService from './services/phones'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newFilter, setNewFilter] = useState('')
+  const [notificationMessage, setNotificationMessage] = useState('nothing happened ...')
 
   useEffect(() => {
     phoneService.getAll()
@@ -23,6 +25,12 @@ const App = () => {
                 const newPersons = 
                   persons.filter(person => person.id !== id)
                 setPersons(newPersons)
+                setNotificationMessage(
+                  `${name} was already removed from server`
+                )
+                setTimeout(() => {
+                  setNotificationMessage(null)
+                }, 5000)
             })
     }
   } 
@@ -32,9 +40,11 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notificationMessage} />
       <Filter newFilter={newFilter} setNewFilter={setNewFilter}/>
       <h2>Add a new</h2>
-      <PersonForm persons={persons} setPersons={setPersons}/>
+      <PersonForm persons={persons} setPersons={setPersons}
+        notificationMessage={notificationMessage} setNotificationMessage={setNotificationMessage} />
       <h2>Numbers</h2>
       <Persons persons={phonesToShow} handleRemove={handleRemove}/>
     </div>
