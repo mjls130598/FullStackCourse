@@ -25,7 +25,7 @@ const App = () => {
                 setPersons(newPersons)
             })
     }
-} 
+  } 
 
   const phonesToShow = (newFilter === '') ? persons : persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase()))
 

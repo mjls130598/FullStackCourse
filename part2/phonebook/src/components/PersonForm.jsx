@@ -7,15 +7,15 @@ const PersonForm = ({persons, setPersons}) => {
 
     const addPhone = (event) =>{
         event.preventDefault()
-        const isPerson = persons.find((person) => person.name === newName)
+        const oldPerson = persons.find((person) => person.name === newName)
 
-        if(!isPerson){
-            const newPerson = {
-                name: newName, 
-                number: newNumber,
-                id: (persons.length + 1).toString(),
-            }
+        const newPerson = {
+            name: newName, 
+            number: newNumber,
+            id: oldPerson ? oldPerson.id : (persons.length + 1).toString(),
+        }
 
+        if(!oldPerson){
             phoneService
                 .create(newPerson)
                 .then(response => {
@@ -24,8 +24,16 @@ const PersonForm = ({persons, setPersons}) => {
                     setNewNumber('')
                 })
         }
-        else
-            alert(newName + ' is already added to phonebook')
+        else{
+            if(confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+                phoneService
+                    .update(oldPerson.id, newPerson)
+                    .then(response => {
+                        setPersons(persons.map(person => 
+                            person.id !== oldPerson.id ? person : response.data))
+                    })
+            }
+        }
     }
 
     const handleNameChange = (event) => {
