@@ -21,13 +21,8 @@ function App() {
       })
     }, [])
 
-  useEffect(() => {
-    const countriesMatch= filter === '' ? countries : 
-      countries.filter(country => country.toLowerCase().includes(filter.toLowerCase()))
-    setCountriesToShow(countriesMatch)
-
-    if(countriesMatch.length === 1){
-      countriesService.get(countriesMatch[0])
+  const handleShowCountry = (name) => {
+    countriesService.get(name)
       .then(response => {
         const countryData = response.data;
         setCountryData(countryData)
@@ -35,6 +30,15 @@ function App() {
       .catch(error => {
         console.error('Error fetching countries:', error);
       })
+  }
+
+  useEffect(() => {
+    const countriesMatch= filter === '' ? countries : 
+      countries.filter(country => country.toLowerCase().includes(filter.toLowerCase()))
+    setCountriesToShow(countriesMatch)
+
+    if(countriesMatch.length === 1){
+      showCountry(countriesMatch[0])
     }
     else
       setCountryData(null)
@@ -47,7 +51,7 @@ function App() {
         <p>Too many matches, specify another filter</p>
       }
       {countriesToShow.length < 10 && countriesToShow.length > 1 &&
-        <Countries countries={countriesToShow} />
+        <Countries countries={countriesToShow} showCountry={handleShowCountry}/>
       }
       {countryData &&
         <Country country={countryData} />

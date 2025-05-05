@@ -1,9 +1,13 @@
-const Countries = ({countries}) => {
+const Countries = ({countries, showCountry}) => {
 
     return(
         <div>
             {countries.map(country => 
-                <p key={country}>{country}</p>)}
+            <div key={country}>
+                <p>{country}</p>
+                <button onClick={() => showCountry(country)}>Show</button>
+            </div>)
+            }
         </div>
     )
 }
