@@ -30,7 +30,7 @@ const PersonForm = ({persons, setPersons, setNotificationMessage, setErrorMessag
                     }, 5000)   
                 })
         }
-        else{
+        /*else{
             if(confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
                 phoneService
                     .update(oldPerson.id, newPerson)
@@ -53,7 +53,7 @@ const PersonForm = ({persons, setPersons, setNotificationMessage, setErrorMessag
                         }, 5000) 
                     })
             }
-        }
+        }*/
     }
 
     const handleNameChange = (event) => {

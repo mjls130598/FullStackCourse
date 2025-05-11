@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3002/api/persons'
+const baseUrl = 'https://phonebook-y9ep.onrender.com/api/persons'
 
 const getAll = () => {
     return axios.get(baseUrl)
@@ -14,13 +14,13 @@ const deletePhone = id => {
     return axios.delete(`${baseUrl}/${id}`)
 }
 
-const update = (id, newObject) => {
+/*const update = (id, newObject) => {
     return axios.put(`${baseUrl}/${id}`, newObject)
-}
+}*/
 
 export default {
     create: create,
     getAll: getAll,
     delete: deletePhone,
-    update: update
+    //update: update
 }
